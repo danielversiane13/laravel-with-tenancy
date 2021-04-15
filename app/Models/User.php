@@ -1,14 +1,17 @@
 <?php
 
-namespace App\Models\Tenant;
+namespace App\Models;
 
+use App\Traits\Uuid;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
-  use HasFactory, Notifiable;
+  use HasFactory, Notifiable, Uuid;
+
+  protected $connection = 'main';
 
   /**
    * The attributes that are mass assignable.
@@ -39,4 +42,9 @@ class User extends Authenticatable
   protected $casts = [
     'email_verified_at' => 'datetime',
   ];
+
+  public function tenantAccess()
+  {
+    return $this->belongsToMany(Tenant::class, 'tenant_access', 'user_id', 'tenant_id');
+  }
 }

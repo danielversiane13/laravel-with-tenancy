@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateCompaniesTable extends Migration
 {
-  public function up()
+  public function up(): void
   {
     Schema::create('companies', function (Blueprint $table) {
       $table->string('id')->primary();
@@ -16,7 +16,7 @@ class CreateCompaniesTable extends Migration
     });
   }
 
-  public function down()
+  public function down(): void
   {
     Schema::dropIfExists('companies');
   }

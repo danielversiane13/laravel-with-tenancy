@@ -8,26 +8,16 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateTenantsTable extends Migration
 {
-  /**
-   * Run the migrations.
-   *
-   * @return void
-   */
   public function up(): void
   {
     Schema::create('tenants', function (Blueprint $table) {
-      $table->string('id')->primary();
+      $table->uuid('id')->primary();
       $table->json('data')->nullable();
 
       $table->timestamps();
     });
   }
 
-  /**
-   * Reverse the migrations.
-   *
-   * @return void
-   */
   public function down(): void
   {
     Schema::dropIfExists('tenants');

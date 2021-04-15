@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByPath;
 
@@ -24,4 +25,6 @@ Route::group([
   Route::get('/', function () {
     return 'The id of the current tenant is ' . tenant('id');
   });
+
+  Route::apiResource('users', UserController::class);
 });

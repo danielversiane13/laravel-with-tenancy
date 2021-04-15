@@ -9,7 +9,7 @@ use Ramsey\Uuid\Uuid;
 
 class MakeCompanyTenantService
 {
-  public function run(string $name): Company
+  public function run(string $name): array
   {
     $uuid = Uuid::uuid4()->toString();
 
@@ -17,8 +17,8 @@ class MakeCompanyTenantService
     $tenant->domains()->create(['domain' => $tenant->id]);
 
     Config::set('database.connections.tenant.database', 't-' . $tenant->id);
-    $company = Company::create(['id' => $tenant->id, 'name' => $name]);
+    $company = Company::create(['name' => $name]);
 
-    return $company;
+    return [$tenant, $company];
   }
 }
