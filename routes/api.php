@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Main\AuthController;
+use App\Http\Controllers\Main\PrivateRoutesTestController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Stancl\Tenancy\Middleware\InitializeTenancyByPath;
@@ -14,6 +16,12 @@ use Stancl\Tenancy\Middleware\InitializeTenancyByPath;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+
+// Auth Routes
+Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout']);
+
+Route::get('private-route', [PrivateRoutesTestController::class, 'test'])->middleware('auth:api');
 
 Route::group([
   'prefix' => '/{tenant}',
